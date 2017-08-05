@@ -1,0 +1,5 @@
+name: FormAPI
+main: jojoe77777\FormAPI\Loader
+version: 1.0.0
+api: [3.0.0-ALPHA7]
+author: jojoe77777
