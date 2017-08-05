@@ -25,7 +25,7 @@ class CustomForm {
 	/**
 	 * @return int
 	 */
-	public function getId(){
+	public function getId() : int {
 		return $this->id;
 	}
 
@@ -49,7 +49,7 @@ class CustomForm {
 	/**
 	 * @return string
 	 */
-	public function getTitle(){
+	public function getTitle() : string {
 		return $this->data["title"];
 	}
 
