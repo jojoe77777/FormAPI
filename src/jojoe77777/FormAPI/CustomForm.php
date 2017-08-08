@@ -64,41 +64,63 @@ class CustomForm {
 
 	/**
 	 * @param string $text
+	 * @param bool|null $default
 	 */
-	public function addToggle(string $text){
-		$this->addContent(["type" => "toggle", "text" => $text]);
+	public function addToggle(string $text, bool $default = null){
+		$content = ["type" => "toggle", "text" => $text];
+		if($default !== null){
+			$content["default"] = $default;
+		}
+		$this->addContent($content);
 	}
 
 	/**
 	 * @param string $text
 	 * @param int $min
 	 * @param int $max
+	 * @param int $step
+	 * @param int $default
 	 */
-	public function addSlider(string $text, int $min, int $max){
-		$this->addContent(["type" => "slider", "text" => $text, "min" => $min, "max" => $max]);
+	public function addSlider(string $text, int $min, int $max, int $step = -1, int $default = -1){
+		$content = ["type" => "slider", "text" => $text, "min" => $min, "max" => $max];
+		if($step !== -1){
+			$content["step"] = $step;
+		}
+		if($default !== -1){
+			$content["default"] = $default;
+		}
+		$this->addContent($content);
 	}
 
 	/**
 	 * @param string $text
 	 * @param array $steps
+	 * @param int $defaultIndex
 	 */
-	public function addStepSlider(string $text, array $steps){
-		$this->addContent(["type" => "step_slider", "text" => $text, "steps" => $steps]);
+	public function addStepSlider(string $text, array $steps, int $defaultIndex = -1){
+		$content = ["type" => "step_slider", "text" => $text, "steps" => $steps];
+		if($defaultIndex !== -1){
+			$content["default"] = $defaultIndex;
+		}
+		$this->addContent($content);
 	}
 
 	/**
 	 * @param string $text
 	 * @param array $options
+	 * @param int $default
 	 */
-	public function addDropdown(string $text, array $options){
-		$this->addContent(["type" => "dropdown", "text" => $text, "options" => $options]);
+	public function addDropdown(string $text, array $options, int $default = null){
+		$this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
 	}
 
 	/**
 	 * @param string $text
+	 * @param string $placeholder
+	 * @param string $default
 	 */
-	public function addInput(string $text){
-		$this->addContent(["type" => "input", "text" => $text]);
+	public function addInput(string $text, string $placeholder = "", string $default = null){
+		$this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
 	}
 
 	/**
