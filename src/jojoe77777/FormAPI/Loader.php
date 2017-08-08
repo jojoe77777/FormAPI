@@ -24,10 +24,20 @@ class Loader extends PluginBase implements Listener {
 	 * @param callable $function
 	 * @return CustomForm
 	 */
-	public function createCustomForm(callable $function) : CustomForm {
+	public function createCustomForm(callable $function = null) : CustomForm {
 		$this->formCount++;
-		$this->forms[$this->formCount] = $function;
+		if($function !== null) {
+			$this->forms[$this->formCount] = $function;
+		}
 		return new CustomForm($this->formCount);
+	}
+
+	public function createSimpleForm(callable $function = null) : SimpleForm {
+		$this->formCount++;
+		if($function !== null) {
+			$this->forms[$this->formCount] = $function;
+		}
+		return new SimpleForm($this->formCount);
 	}
 
 	/**
