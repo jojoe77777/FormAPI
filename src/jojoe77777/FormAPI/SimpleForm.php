@@ -9,9 +9,6 @@ use pocketmine\Player;
 
 class SimpleForm {
 
-	const IMAGE_TYPE_PATH = 0;
-	const IMAGE_TYPE_URL = 1;
-
 	/** @var int */
 	public $id;
 	/** @var array */
