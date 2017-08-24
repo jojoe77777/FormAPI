@@ -45,7 +45,7 @@ class Loader extends PluginBase implements Listener {
 	 */
 	public function onPacketReceived(DataPacketReceiveEvent $ev){
 		$pk = $ev->getPacket();
-		if($pk instanceof ModalFormResponsePacket && isset($pk->formId) && (isset($pk->data))){
+		if($pk instanceof ModalFormResponsePacket && isset($pk->formId) && isset($pk->data)){
 			$formId = $pk->formId;
 			$data = $pk->data;
 			if(isset($this->forms[$formId])){
