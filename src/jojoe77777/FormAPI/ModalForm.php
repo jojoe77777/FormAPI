@@ -21,8 +21,8 @@ class ModalForm extends Form {
 		$this->data["type"] = "modal";
 		$this->data["title"] = "";
 		$this->data["content"] = $this->content;
-    $this->data["button1"] = "";
-    $this->data["button2"] = "";
+    		$this->data["button1"] = "";
+    		$this->data["button2"] = "";
 	}
 	/**
 	 * @return int
