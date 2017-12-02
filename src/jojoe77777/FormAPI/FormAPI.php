@@ -43,7 +43,7 @@ class FormAPI extends PluginBase implements Listener {
 		return $form;
 	}
 	
-	public function createModalForm(callable $function = null) : SimpleForm {
+	public function createModalForm(callable $function = null) : ModalForm {
 		$this->formCount++;
 		$form = new ModalForm($this->formCount, $function);
 		if($function !== null){
