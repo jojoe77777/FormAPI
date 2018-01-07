@@ -1,9 +1,14 @@
 <?php
+
 declare(strict_types = 1);
+
 namespace jojoe77777\FormAPI;
+
 use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
 use pocketmine\Player;
+
 class ModalForm extends Form {
+	
 	/** @var int */
 	public $id;
 	/** @var array */
