@@ -18,6 +18,7 @@ class FormAPI extends PluginBase implements Listener {
 	public $forms = [];
 
 	public function onEnable() : void {
+		$this->formCount = rand(0, 0xFFFFFFFF);
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
@@ -26,7 +27,7 @@ class FormAPI extends PluginBase implements Listener {
 	 * @return CustomForm
 	 */
 	public function createCustomForm(callable $function = null) : CustomForm {
-		$this->formCount++;
+		$this->formCountBump();
 		$form = new CustomForm($this->formCount, $function);
 		if($function !== null){
 			$this->forms[$this->formCount] = $form;
@@ -35,7 +36,7 @@ class FormAPI extends PluginBase implements Listener {
 	}
 
 	public function createSimpleForm(callable $function = null) : SimpleForm {
-		$this->formCount++;
+		$this->formCountBump();
 		$form = new SimpleForm($this->formCount, $function);
 		if($function !== null){
 			$this->forms[$this->formCount] = $form;
@@ -44,12 +45,19 @@ class FormAPI extends PluginBase implements Listener {
 	}
 	
 	public function createModalForm(callable $function = null) : ModalForm {
-		$this->formCount++;
+		$this->formCountBump();
 		$form = new ModalForm($this->formCount, $function);
 		if($function !== null){
 			$this->forms[$this->formCount] = $form;
 		}
 		return $form;
+	}
+	
+	public function formCountBump() : void {
+		++$this->formCount;
+		if($this->formCount & (1 << 32)){ // integer overflow!
+			$this->formCount = rand(0, 0xFFFFFFFF);
+		}
 	}
 
 	/**
