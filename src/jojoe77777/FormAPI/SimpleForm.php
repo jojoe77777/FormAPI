@@ -20,6 +20,7 @@ class SimpleForm extends Form {
 	private $content = "";
 	/** @var string */
 	public $playerName;
+	private $labelMap = [];
 
 	/**
 	 * @param int $id
@@ -49,6 +50,10 @@ class SimpleForm extends Form {
 		$player->dataPacket($pk);
 		$this->playerName = $player->getName();
 	}
+
+    public function processData(&$data) : void {
+	    $data = $this->labelMap[$data] ?? null;
+    }
 
 	/**
 	 * @param string $title
@@ -82,14 +87,16 @@ class SimpleForm extends Form {
 	 * @param string $text
 	 * @param int $imageType
 	 * @param string $imagePath
+     * @param string $label
 	 */
-	public function addButton(string $text, int $imageType = -1, string $imagePath = "") : void {
+	public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
 		$content = ["text" => $text];
 		if($imageType !== -1){
 			$content["image"]["type"] = $imageType === 0 ? "path" : "url";
 			$content["image"]["data"] = $imagePath;
 		}
 		$this->data["buttons"][] = $content;
+		$this->labelMap[] = $label ?? count($this->labelMap);
 	}
 
 }
