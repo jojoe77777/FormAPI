@@ -77,6 +77,9 @@ class FormAPI extends PluginBase implements Listener {
                 }
                 $form->processData($data);
                 $callable = $form->getCallable();
+				if(!is_array($data)){
+					$data = [$data];
+				}
                 if($callable !== null) {
                     $callable($ev->getPlayer(), $data);
                 }
