@@ -29,27 +29,21 @@ class FormAPI extends PluginBase implements Listener {
     public function createCustomForm(callable $function = null) : CustomForm {
         $this->formCountBump();
         $form = new CustomForm($this->formCount, $function);
-        if($function !== null) {
-            $this->forms[$this->formCount] = $form;
-        }
+        $this->forms[$this->formCount] = $form;
         return $form;
     }
 
     public function createSimpleForm(callable $function = null) : SimpleForm {
         $this->formCountBump();
         $form = new SimpleForm($this->formCount, $function);
-        if($function !== null) {
-            $this->forms[$this->formCount] = $form;
-        }
+        $this->forms[$this->formCount] = $form;
         return $form;
     }
 
     public function createModalForm(callable $function = null) : ModalForm {
         $this->formCountBump();
         $form = new ModalForm($this->formCount, $function);
-        if($function !== null) {
-            $this->forms[$this->formCount] = $form;
-        }
+        $this->forms[$this->formCount] = $form;
         return $form;
     }
 

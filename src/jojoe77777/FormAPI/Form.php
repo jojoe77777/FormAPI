@@ -53,6 +53,10 @@ abstract class Form {
         return $this->callable;
     }
 
+    public function setCallable(?callable $callable) {
+        $this->callable = $callable;
+    }
+
     public function processData(&$data) : void {
     }
 }
