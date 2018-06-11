@@ -16,10 +16,20 @@ class FormAPI extends PluginBase implements Listener {
     public $formCount = 0;
     /** @var array */
     public $forms = [];
+    /** @var FromAPI */
+    private static $instance;
 
     public function onEnable() : void {
+        self::$instance = $this;
         $this->formCount = rand(0, 0xFFFFFFFF);
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
+    
+    /**
+     * @return FormAPI
+     */
+    public static function getInstance() : self {
+        return self::$instance;
     }
 
     /**
