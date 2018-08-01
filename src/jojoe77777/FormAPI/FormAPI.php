@@ -62,7 +62,11 @@ class FormAPI extends PluginBase implements Listener {
         if($pk instanceof ModalFormResponsePacket) {
             $player = $ev->getPlayer();
             $formId = $pk->formId;
-            $data = json_decode($pk->formData, true);
+            
+            $fix = str_replace([',,', ',]'], [',"",', ',""]'], $pk->formData);
+            $data = json_decode($fix, true);
+            #$data = json_decode($pk->formData, true);
+            
             if(isset($this->forms[$formId])) {
                 /** @var Form $form */
                 $form = $this->forms[$formId];
