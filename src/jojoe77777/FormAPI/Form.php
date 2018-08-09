@@ -41,7 +41,7 @@ abstract class Form {
         $pk = new ModalFormRequestPacket();
         $pk->formId = $this->id;
         $pk->formData = json_encode($this->data);
-        $player->dataPacket($pk);
+        $player->sendDataPacket($pk);
         $this->playerName = $player->getName();
     }
 
