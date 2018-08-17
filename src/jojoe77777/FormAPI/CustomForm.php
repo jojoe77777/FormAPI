@@ -4,46 +4,18 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
-use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
-use pocketmine\Player;
-
 class CustomForm extends Form {
 
-    /** @var int */
-    public $id;
-    /** @var array */
-    private $data = [];
-    /** @var string */
-    public $playerName;
     private $labelMap = [];
 
     /**
-     * @param int $id
      * @param callable $callable
      */
-    public function __construct(int $id, ?callable $callable) {
-        parent::__construct($id, $callable);
+    public function __construct(?callable $callable) {
+        parent::__construct($callable);
         $this->data["type"] = "custom_form";
         $this->data["title"] = "";
         $this->data["content"] = [];
-    }
-
-    /**
-     * @return int
-     */
-    public function getId() : int {
-        return $this->id;
-    }
-
-    /**
-     * @param Player $player
-     */
-    public function sendToPlayer(Player $player) : void {
-        $pk = new ModalFormRequestPacket();
-        $pk->formId = $this->id;
-        $pk->formData = json_encode($this->data);
-        $player->dataPacket($pk);
-        $this->playerName = $player->getName();
     }
 
     public function processData(&$data) : void {
