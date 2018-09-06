@@ -4,49 +4,31 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
-use pocketmine\network\mcpe\protocol\ModalFormRequestPacket;
+use pocketmine\form\Form as IForm;
 use pocketmine\Player;
 
-abstract class Form {
+abstract class Form implements IForm{
 
-    /** @var int */
-    public $id;
     /** @var array */
-    private $data = [];
-    /** @var string */
-    public $playerName;
+    protected $data = [];
     /** @var callable */
     private $callable;
 
     /**
-     * @param int $id
      * @param callable $callable
      */
-    public function __construct(int $id, ?callable $callable) {
-        $this->id = $id;
+    public function __construct(?callable $callable) {
         $this->callable = $callable;
     }
 
     /**
-     * @return int
-     */
-    public function getId() : int {
-        return $this->id;
-    }
-
-    /**
+     * @deprecated
+     * @see Player::sendForm()
+     *
      * @param Player $player
      */
     public function sendToPlayer(Player $player) : void {
-        $pk = new ModalFormRequestPacket();
-        $pk->formId = $this->id;
-        $pk->formData = json_encode($this->data);
-        $player->dataPacket($pk);
-        $this->playerName = $player->getName();
-    }
-
-    public function isRecipient(Player $player) : bool {
-        return $player->getName() === $this->playerName;
+        $player->sendForm($this);
     }
 
     public function getCallable() : ?callable {
@@ -57,6 +39,18 @@ abstract class Form {
         $this->callable = $callable;
     }
 
+    public function handleResponse(Player $player, $data) : void {
+        $this->processData($data);
+        $callable = $this->getCallable();
+        if($callable !== null) {
+            $callable($player, $data);
+        }
+    }
+
     public function processData(&$data) : void {
+    }
+
+    public function jsonSerialize(){
+        return $this->data;
     }
 }
