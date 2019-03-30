@@ -15,7 +15,7 @@ class SimpleForm extends Form {
     private $labelMap = [];
 
     /**
-     * @param callable $callable
+     * @param callable|null $callable
      */
     public function __construct(?callable $callable) {
         parent::__construct($callable);

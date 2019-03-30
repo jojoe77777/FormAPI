@@ -10,7 +10,7 @@ class ModalForm extends Form {
     private $content = "";
 
     /**
-     * @param callable $callable
+     * @param callable|null $callable
      */
     public function __construct(?callable $callable) {
         parent::__construct($callable);
