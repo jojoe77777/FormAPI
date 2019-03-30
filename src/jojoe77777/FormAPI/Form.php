@@ -11,11 +11,11 @@ abstract class Form implements IForm{
 
     /** @var array */
     protected $data = [];
-    /** @var callable */
+    /** @var callable|null */
     private $callable;
 
     /**
-     * @param callable $callable
+     * @param callable|null $callable
      */
     public function __construct(?callable $callable) {
         $this->callable = $callable;
