@@ -5,6 +5,9 @@ declare(strict_types = 1);
 namespace jojoe77777\FormAPI;
 
 class CustomForm extends Form {
+    
+    const IMAGE_TYPE_PATH = 0;
+    const IMAGE_TYPE_URL = 1;
 
     private $labelMap = [];
 
@@ -50,7 +53,21 @@ class CustomForm extends Form {
         $this->addContent(["type" => "label", "text" => $text]);
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
-
+     /**
+     * @param string $text
+     * @param int $imageType
+     * @param string $imagePath
+     * @param string $label
+     */
+    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
+        $content = ["text" => $text];
+        if($imageType !== -1) {
+            $content["image"]["type"] = $imageType === 0 ? "path" : "url";
+            $content["image"]["data"] = $imagePath;
+        }
+        $this->data["buttons"][] = $content;
+        $this->labelMap[] = $label ?? count($this->labelMap);
+    }
     /**
      * @param string $text
      * @param bool|null $default
