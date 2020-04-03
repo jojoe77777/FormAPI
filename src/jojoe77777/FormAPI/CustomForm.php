@@ -4,9 +4,12 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
+use pocketmine\form\FormValidationException;
+
 class CustomForm extends Form {
 
     private $labelMap = [];
+	private $validationMethods = [];
 
     /**
      * @param callable|null $callable
@@ -18,15 +21,28 @@ class CustomForm extends Form {
         $this->data["content"] = [];
     }
 
-    public function processData(&$data) : void {
-        if(is_array($data)) {
-            $new = [];
-            foreach ($data as $i => $v) {
-                $new[$this->labelMap[$i]] = $v;
-            }
-            $data = $new;
-        }
-    }
+	public function processData(&$data) : void {
+    	if($data !== null && !is_array($data)) {
+			throw new FormValidationException("Expected an array response, got " . gettype($data));
+		}
+    	if(is_array($data)) {
+			if(count($data) !== count($this->validationMethods)) {
+				throw new FormValidationException("Expected an array response with the size " . count($this->validationMethods) . ", got " . count($data));
+			}
+			$new = [];
+			foreach($data as $i => $v){
+				$validationMethod = $this->validationMethods[$i] ?? "";
+				if($validationMethod === "") {
+					throw new FormValidationException("Invalid element " . $i);
+				}
+				if(!call_user_func($validationMethod, $v)) {
+					throw new FormValidationException("Invalid type given for element " . $this->labelMap[$i]);
+				}
+				$new[$this->labelMap[$i]] = $v;
+			}
+			$data = $new;
+		}
+	}
 
     /**
      * @param string $title
@@ -49,6 +65,7 @@ class CustomForm extends Form {
     public function addLabel(string $text, ?string $label = null) : void {
         $this->addContent(["type" => "label", "text" => $text]);
         $this->labelMap[] = $label ?? count($this->labelMap);
+        $this->validationMethods[] = "is_null";
     }
 
     /**
@@ -63,6 +80,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
+		$this->validationMethods[] = "is_bool";
     }
 
     /**
@@ -83,6 +101,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
+		$this->validationMethods[] = "is_int";
     }
 
     /**
@@ -98,6 +117,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
+		$this->validationMethods[] = "is_int";
     }
 
     /**
@@ -109,6 +129,7 @@ class CustomForm extends Form {
     public function addDropdown(string $text, array $options, int $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
+		$this->validationMethods[] = "is_string";
     }
 
     /**
@@ -120,6 +141,7 @@ class CustomForm extends Form {
     public function addInput(string $text, string $placeholder = "", string $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
+		$this->validationMethods[] = "is_string";
     }
 
     /**
