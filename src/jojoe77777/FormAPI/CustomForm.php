@@ -106,7 +106,7 @@ class CustomForm extends Form {
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
         $this->validationMethods[] = static function($v) use($min, $max) : bool {
-            return is_float($v) && $v >= $min && $v <= $max;
+            return (is_float($v) || is_int($v)) && $v >= $min && $v <= $max;
         };
     }
 
