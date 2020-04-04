@@ -30,7 +30,8 @@ class SimpleForm extends Form {
         if(!is_int($data)) {
             throw new FormValidationException("Expected an integer response, got " . gettype($data));
         }
-        if($data >= $this->data["buttons"] || $this->data["buttons"] < 0) {
+        $count = count($this->data["buttons"]);
+        if($data >= $count || $count < 0) {
             throw new FormValidationException("Button $data does not exist");
         }
         $data = $this->labelMap[$data] ?? null;
