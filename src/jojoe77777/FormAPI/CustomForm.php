@@ -9,7 +9,7 @@ use pocketmine\form\FormValidationException;
 class CustomForm extends Form {
 
     private $labelMap = [];
-	private $validationMethods = [];
+    private $validationMethods = [];
 
     /**
      * @param callable|null $callable
@@ -21,28 +21,28 @@ class CustomForm extends Form {
         $this->data["content"] = [];
     }
 
-	public function processData(&$data) : void {
-    	if($data !== null && !is_array($data)) {
-			throw new FormValidationException("Expected an array response, got " . gettype($data));
-		}
-    	if(is_array($data)) {
-			if(count($data) !== count($this->validationMethods)) {
-				throw new FormValidationException("Expected an array response with the size " . count($this->validationMethods) . ", got " . count($data));
-			}
-			$new = [];
-			foreach($data as $i => $v){
-				$validationMethod = $this->validationMethods[$i] ?? null;
-				if($validationMethod === null) {
-					throw new FormValidationException("Invalid element " . $i);
-				}
-				if(!$validationMethod($v)) {
-					throw new FormValidationException("Invalid type given for element " . $this->labelMap[$i]);
-				}
-				$new[$this->labelMap[$i]] = $v;
-			}
-			$data = $new;
-		}
-	}
+    public function processData(&$data) : void {
+        if($data !== null && !is_array($data)) {
+            throw new FormValidationException("Expected an array response, got " . gettype($data));
+        }
+        if(is_array($data)) {
+            if(count($data) !== count($this->validationMethods)) {
+                throw new FormValidationException("Expected an array response with the size " . count($this->validationMethods) . ", got " . count($data));
+            }
+            $new = [];
+            foreach($data as $i => $v){
+                $validationMethod = $this->validationMethods[$i] ?? null;
+                if($validationMethod === null) {
+                    throw new FormValidationException("Invalid element " . $i);
+                }
+                if(!$validationMethod($v)) {
+                    throw new FormValidationException("Invalid type given for element " . $this->labelMap[$i]);
+                }
+                $new[$this->labelMap[$i]] = $v;
+            }
+            $data = $new;
+        }
+    }
 
     /**
      * @param string $title
@@ -66,8 +66,8 @@ class CustomForm extends Form {
         $this->addContent(["type" => "label", "text" => $text]);
         $this->labelMap[] = $label ?? count($this->labelMap);
         $this->validationMethods[] = static function($v) : bool {
-        	return $v === null;
-		};
+            return $v === null;
+        };
     }
 
     /**
@@ -82,9 +82,9 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-		$this->validationMethods[] = static function($v) : bool {
-			return is_bool($v);
-		};
+        $this->validationMethods[] = static function($v) : bool {
+            return is_bool($v);
+        };
     }
 
     /**
@@ -105,9 +105,9 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-		$this->validationMethods[] = static function($v) use($min, $max) : bool {
-			return is_float($v) && $v >= $min && $v <= $max;
-		};
+        $this->validationMethods[] = static function($v) use($min, $max) : bool {
+            return is_float($v) && $v >= $min && $v <= $max;
+        };
     }
 
     /**
@@ -123,9 +123,9 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-		$this->validationMethods[] = static function($v) use($steps) : bool {
-			return is_int($v) && isset($steps[$v]);
-		};
+        $this->validationMethods[] = static function($v) use($steps) : bool {
+            return is_int($v) && isset($steps[$v]);
+        };
     }
 
     /**
@@ -137,9 +137,9 @@ class CustomForm extends Form {
     public function addDropdown(string $text, array $options, int $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-		$this->validationMethods[] = static function($v) use($options) : bool {
-			return is_int($v) && isset($options[$v]);
-		};
+        $this->validationMethods[] = static function($v) use($options) : bool {
+            return is_int($v) && isset($options[$v]);
+        };
     }
 
     /**
@@ -151,9 +151,9 @@ class CustomForm extends Form {
     public function addInput(string $text, string $placeholder = "", string $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-		$this->validationMethods[] = static function($v) : bool {
-			return is_string($v);
-		};
+        $this->validationMethods[] = static function($v) : bool {
+            return is_string($v);
+        };
     }
 
     /**

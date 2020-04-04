@@ -24,12 +24,12 @@ class ModalForm extends Form {
     }
 
     public function processData(&$data) : void {
-		if(!is_bool($data)) {
-			throw new FormValidationException("Expected a boolean response, got " . gettype($data));
-		}
-	}
+        if(!is_bool($data)) {
+            throw new FormValidationException("Expected a boolean response, got " . gettype($data));
+        }
+    }
 
-	/**
+    /**
      * @param string $title
      */
     public function setTitle(string $title) : void {
