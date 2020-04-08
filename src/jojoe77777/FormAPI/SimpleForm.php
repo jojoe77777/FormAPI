@@ -27,7 +27,7 @@ class SimpleForm extends Form {
     }
 
     public function processData(&$data) : void {
-        if(!is_int($data)) {
+        if($data !== null && !is_int($data)) {
             throw new FormValidationException("Expected an integer response, got " . gettype($data));
         }
         $count = count($this->data["buttons"]);
