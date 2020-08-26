@@ -22,6 +22,7 @@ class SimpleForm extends Form {
         $this->data["type"] = "form";
         $this->data["title"] = "";
         $this->data["content"] = $this->content;
+        $this->data["buttons"] = []:
     }
 
     public function processData(&$data) : void {
