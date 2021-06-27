@@ -12,9 +12,9 @@ class SimpleForm extends Form {
     const IMAGE_TYPE_URL = 1;
 
     /** @var string */
-    private $content = "";
+    private string $content = "";
 
-    private $labelMap = [];
+    private array $labelMap = [];
 
     /**
      * @param callable|null $callable

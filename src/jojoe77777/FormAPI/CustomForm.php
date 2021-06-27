@@ -8,8 +8,8 @@ use pocketmine\form\FormValidationException;
 
 class CustomForm extends Form {
 
-    private $labelMap = [];
-    private $validationMethods = [];
+    private array $labelMap = [];
+    private array $validationMethods = [];
 
     /**
      * @param callable|null $callable
