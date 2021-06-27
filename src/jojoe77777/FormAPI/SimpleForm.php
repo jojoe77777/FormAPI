@@ -42,9 +42,11 @@ class SimpleForm extends Form {
 
     /**
      * @param string $title
+     * @return SimpleForm
      */
-    public function setTitle(string $title) : void {
+    public function setTitle(string $title) : self {
         $this->data["title"] = $title;
+        return $this;
     }
 
     /**
@@ -63,18 +65,21 @@ class SimpleForm extends Form {
 
     /**
      * @param string $content
+     * @return SimpleForm
      */
-    public function setContent(string $content) : void {
+    public function setContent(string $content) : self {
         $this->data["content"] = $content;
+        return $this;
     }
 
     /**
      * @param string $text
      * @param int $imageType
      * @param string $imagePath
-     * @param string $label
+     * @param string|null $label
+     * @return SimpleForm
      */
-    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
+    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : self {
         $content = ["text" => $text];
         if($imageType !== -1) {
             $content["image"]["type"] = $imageType === 0 ? "path" : "url";
@@ -82,6 +87,7 @@ class SimpleForm extends Form {
         }
         $this->data["buttons"][] = $content;
         $this->labelMap[] = $label ?? count($this->labelMap);
+        return $this;
     }
 
 }

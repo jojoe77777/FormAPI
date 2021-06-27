@@ -31,9 +31,11 @@ class ModalForm extends Form {
 
     /**
      * @param string $title
+     * @return ModalForm
      */
-    public function setTitle(string $title) : void {
+    public function setTitle(string $title) : self {
         $this->data["title"] = $title;
+        return $this;
     }
 
     /**
@@ -52,16 +54,20 @@ class ModalForm extends Form {
 
     /**
      * @param string $content
+     * @return ModalForm
      */
-    public function setContent(string $content) : void {
+    public function setContent(string $content) : self {
         $this->data["content"] = $content;
+        return $this;
     }
 
     /**
      * @param string $text
+     * @return ModalForm
      */
-    public function setButton1(string $text) : void {
+    public function setButton1(string $text) : self {
         $this->data["button1"] = $text;
+        return $this;
     }
 
     /**
@@ -73,9 +79,11 @@ class ModalForm extends Form {
 
     /**
      * @param string $text
+     * @return ModalForm
      */
-    public function setButton2(string $text) : void {
+    public function setButton2(string $text) : self {
         $this->data["button2"] = $text;
+        return $this;
     }
 
     /**

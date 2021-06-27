@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
+use InvalidArgumentException;
 use pocketmine\form\Form as IForm;
 use pocketmine\player\Player;
 
@@ -22,10 +23,10 @@ abstract class Form implements IForm{
     }
 
     /**
+     * @param Player $player
+     * @throws InvalidArgumentException
      * @deprecated
      * @see Player::sendForm()
-     *
-     * @param Player $player
      */
     public function sendToPlayer(Player $player) : void {
         $player->sendForm($this);
