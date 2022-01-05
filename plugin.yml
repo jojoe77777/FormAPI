@@ -1,5 +1,7 @@
 name: FormAPI
 main: jojoe77777\FormAPI\FormAPI
-version: 1.3.0
-api: 3.2.0
-author: jojoe77777
+version: 1.3.1
+api: 4.0.0
+authors:
+ - jojoe77777
+ - KeksDev
