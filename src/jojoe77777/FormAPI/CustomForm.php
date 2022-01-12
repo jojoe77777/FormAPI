@@ -65,9 +65,7 @@ class CustomForm extends Form {
     public function addLabel(string $text, ?string $label = null) : void {
         $this->addContent(["type" => "label", "text" => $text]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) : bool {
-            return $v === null;
-        };
+        $this->validationMethods[] = static fn($v) => $v === null;
     }
 
     /**
@@ -82,9 +80,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) : bool {
-            return is_bool($v);
-        };
+        $this->validationMethods[] = static fn($v) => is_bool($v);
     }
 
     /**
@@ -105,9 +101,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) use($min, $max) : bool {
-            return (is_float($v) || is_int($v)) && $v >= $min && $v <= $max;
-        };
+        $this->validationMethods[] = static fn($v) => (is_float($v) || is_int($v)) && $v >= $min && $v <= $max;
     }
 
     /**
@@ -123,9 +117,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) use($steps) : bool {
-            return is_int($v) && isset($steps[$v]);
-        };
+        $this->validationMethods[] = static fn($v) => is_int($v) && isset($steps[$v];
     }
 
     /**
@@ -137,9 +129,7 @@ class CustomForm extends Form {
     public function addDropdown(string $text, array $options, int $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) use($options) : bool {
-            return is_int($v) && isset($options[$v]);
-        };
+        $this->validationMethods[] = static fn($v) => is_int($v) && isset($options[$v];
     }
 
     /**
@@ -151,9 +141,7 @@ class CustomForm extends Form {
     public function addInput(string $text, string $placeholder = "", string $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static function($v) : bool {
-            return is_string($v);
-        };
+        $this->validationMethods[] = static fn($v) => is_string($v);
     }
 
     /**
