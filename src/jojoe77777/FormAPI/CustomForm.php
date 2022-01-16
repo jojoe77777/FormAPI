@@ -117,7 +117,7 @@ class CustomForm extends Form {
         }
         $this->addContent($content);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static fn($v) => is_int($v) && isset($steps[$v];
+        $this->validationMethods[] = static fn($v) => is_int($v) && isset($steps[$v]);
     }
 
     /**
@@ -129,7 +129,7 @@ class CustomForm extends Form {
     public function addDropdown(string $text, array $options, int $default = null, ?string $label = null) : void {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
         $this->labelMap[] = $label ?? count($this->labelMap);
-        $this->validationMethods[] = static fn($v) => is_int($v) && isset($options[$v];
+        $this->validationMethods[] = static fn($v) => is_int($v) && isset($options[$v]);
     }
 
     /**
