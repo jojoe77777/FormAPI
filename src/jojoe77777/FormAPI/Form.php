@@ -21,16 +21,6 @@ abstract class Form implements IForm{
         $this->callable = $callable;
     }
 
-    /**
-     * @deprecated
-     * @see Player::sendForm()
-     *
-     * @param Player $player
-     */
-    public function sendToPlayer(Player $player) : void {
-        $player->sendForm($this);
-    }
-
     public function getCallable() : ?callable {
         return $this->callable;
     }
