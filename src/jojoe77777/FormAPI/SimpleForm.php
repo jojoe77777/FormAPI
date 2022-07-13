@@ -72,9 +72,9 @@ class SimpleForm extends Form {
      * @param string $text
      * @param int $imageType
      * @param string $imagePath
-     * @param string $label
+     * @param mixed $label
      */
-    public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : void {
+    public function addButton(string $text, int $imageType = -1, string $imagePath = "", mixed $label = null) : void {
         $content = ["text" => $text];
         if($imageType !== -1) {
             $content["image"]["type"] = $imageType === 0 ? "path" : "url";
