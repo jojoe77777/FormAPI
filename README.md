@@ -17,5 +17,5 @@ projects:
   YourPlugin:
     libs:
       - src: jojoe77777/FormAPI/libFormAPI
-        version: ^2.1.0
+        version: ^2.1.1
 ```
