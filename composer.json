@@ -1,0 +1,28 @@
+{
+    "name": "jojoe77777/formapi",
+    "description": "Simple API for creating forms on PocketMine-MP.",
+    "type": "library",
+    "license": "LGPL-3.0",
+    "require": {
+        "pocketmine/pocketmine-mp": "^4.0.0"
+    },
+    "autoload": {
+        "classmap": ["src"]
+    },
+    "authors": [
+        {
+            "name": "jojoe77777",
+            "email": "jojoefivesevens@gmail.com"
+        },
+        {
+            "name": "Dylan K. Taylor",
+            "email": "dktapps@pmmp.io"
+        }
+    ],
+    "extra": {
+        "virion": {
+            "spec": "3.0",
+            "namespace-root": "jojoe77777\\FormAPI"
+        }
+    }
+}

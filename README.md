@@ -18,7 +18,7 @@ projects:
   YourPlugin:
     libs:
       - src: jojoe77777/FormAPI/libFormAPI
-        version: ^2.1.0
+        version: ^2.1.1
 ```
 #### Virion v3
 In your `composer.json` add an entry to the `require` attribute, like so:
@@ -27,7 +27,7 @@ In your `composer.json` add an entry to the `require` attribute, like so:
   {
     "name": "author/project",
     "require": {
-+     "jojoe77777/formapi": "^2.1.0",
++     "jojoe77777/formapi": "^2.1.1",
       "pmmp/pocketmine-mp": "^4.0.0
     }
   }
