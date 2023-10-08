@@ -10,6 +10,7 @@ This library can be loaded as a plugin phar. You can use the [`depend`](https://
 ### As a virion
 This library supports being included as a [virion](https://github.com/poggit/support/blob/master/virion.md).
 
+#### Virion v1
 If you use [Poggit](https://poggit.pmmp.io) to build your plugin, you can add it to your `.poggit.yml` like so:
 
 ```yml
@@ -18,4 +19,16 @@ projects:
     libs:
       - src: jojoe77777/FormAPI/libFormAPI
         version: ^2.1.1
+```
+#### Virion v3
+In your `composer.json` add an entry to the `require` attribute, like so:
+
+```diff
+  {
+    "name": "author/project",
+    "require": {
++     "jojoe77777/formapi": "^2.1.1",
+      "pmmp/pocketmine-mp": "^4.0.0
+    }
+  }
 ```
