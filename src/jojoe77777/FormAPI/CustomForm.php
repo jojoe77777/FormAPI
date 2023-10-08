@@ -30,7 +30,7 @@ class CustomForm extends Form {
                 throw new FormValidationException("Expected an array response with the size " . count($this->validationMethods) . ", got " . count($data));
             }
             $new = [];
-            foreach($data as $i => $v){
+            foreach($data as $i => $v) {
                 $validationMethod = $this->validationMethods[$i] ?? null;
                 if($validationMethod === null) {
                     throw new FormValidationException("Invalid element " . $i);
@@ -46,7 +46,7 @@ class CustomForm extends Form {
 
     /**
      * @param string $title
-     * @return CustomForm
+     * @return $this
      */
     public function setTitle(string $title) : self {
         $this->data["title"] = $title;
@@ -63,7 +63,7 @@ class CustomForm extends Form {
     /**
      * @param string $text
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addLabel(string $text, ?string $label = null) : self {
         $this->addContent(["type" => "label", "text" => $text]);
@@ -76,7 +76,7 @@ class CustomForm extends Form {
      * @param string $text
      * @param bool|null $default
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addToggle(string $text, bool $default = null, ?string $label = null) : self {
         $content = ["type" => "toggle", "text" => $text];
@@ -96,7 +96,7 @@ class CustomForm extends Form {
      * @param int $step
      * @param int $default
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addSlider(string $text, int $min, int $max, int $step = -1, int $default = -1, ?string $label = null) : self {
         $content = ["type" => "slider", "text" => $text, "min" => $min, "max" => $max];
@@ -117,7 +117,7 @@ class CustomForm extends Form {
      * @param array $steps
      * @param int $defaultIndex
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addStepSlider(string $text, array $steps, int $defaultIndex = -1, ?string $label = null) : self {
         $content = ["type" => "step_slider", "text" => $text, "steps" => $steps];
@@ -135,7 +135,7 @@ class CustomForm extends Form {
      * @param array $options
      * @param int|null $default
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addDropdown(string $text, array $options, int $default = null, ?string $label = null) : self {
         $this->addContent(["type" => "dropdown", "text" => $text, "options" => $options, "default" => $default]);
@@ -149,7 +149,7 @@ class CustomForm extends Form {
      * @param string $placeholder
      * @param string|null $default
      * @param string|null $label
-     * @return CustomForm
+     * @return $this
      */
     public function addInput(string $text, string $placeholder = "", string $default = null, ?string $label = null) : self {
         $this->addContent(["type" => "input", "text" => $text, "placeholder" => $placeholder, "default" => $default]);
@@ -160,7 +160,7 @@ class CustomForm extends Form {
 
     /**
      * @param array $content
-     * @return CustomForm
+     * @return $this
      */
     private function addContent(array $content) : self {
         $this->data["content"][] = $content;

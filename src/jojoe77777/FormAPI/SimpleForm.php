@@ -28,7 +28,7 @@ class SimpleForm extends Form {
     }
 
     public function processData(&$data) : void {
-        if($data !== null){
+        if($data !== null) {
             if(!is_int($data)) {
                 throw new FormValidationException("Expected an integer response, got " . gettype($data));
             }
@@ -42,7 +42,7 @@ class SimpleForm extends Form {
 
     /**
      * @param string $title
-     * @return SimpleForm
+     * @return $this
      */
     public function setTitle(string $title) : self {
         $this->data["title"] = $title;
@@ -65,7 +65,7 @@ class SimpleForm extends Form {
 
     /**
      * @param string $content
-     * @return SimpleForm
+     * @return $this
      */
     public function setContent(string $content) : self {
         $this->data["content"] = $content;
@@ -77,7 +77,7 @@ class SimpleForm extends Form {
      * @param int $imageType
      * @param string $imagePath
      * @param string|null $label
-     * @return SimpleForm
+     * @return $this
      */
     public function addButton(string $text, int $imageType = -1, string $imagePath = "", ?string $label = null) : self {
         $content = ["text" => $text];
