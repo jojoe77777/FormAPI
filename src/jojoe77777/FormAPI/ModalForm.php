@@ -24,6 +24,7 @@ class ModalForm extends Form {
     }
 
     // The error related to the "Esc" key has been fixed
+   
     public function processData(&$data): void
     {
         if ($data === null) {
@@ -31,16 +32,8 @@ class ModalForm extends Form {
             return;
         }
 
-        if (!is_int($data)) {
+        if (!is_bool($data)) {
             throw new FormValidationException("Expected an integer response, got " . gettype($data));
-        }
-
-        if ($data === 0) {
-            $data = true; 
-        } elseif ($data === 1) {
-            $data = false;
-        } else {
-            throw new FormValidationException("Button $data does not exist");
         }
     }
 
