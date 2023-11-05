@@ -23,9 +23,17 @@ class ModalForm extends Form {
         $this->data["button2"] = "";
     }
 
-    public function processData(&$data) : void {
-        if(!is_bool($data)) {
-            throw new FormValidationException("Expected a boolean response, got " . gettype($data));
+    // The error related to the "Esc" key has been fixed
+   
+    public function processData(&$data): void
+    {
+        if ($data === null) {
+            $data = null; 
+            return;
+        }
+
+        if (!is_bool($data)) {
+            throw new FormValidationException("Expected an integer response, got " . gettype($data));
         }
     }
 
